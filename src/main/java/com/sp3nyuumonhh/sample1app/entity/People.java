@@ -5,15 +5,17 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "people")
-public class Person {
+public class People {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "people_seq_gen")
+    @SequenceGenerator(name = "people_seq_gen", sequenceName = "PEOPLE_SEQ", allocationSize = 1)
     @Column
-    private long id;
+    private Long id;
 
     @Column(length = 50, nullable = false)
     private String name;
