@@ -39,7 +39,8 @@ public class HelloController {
     // mav.setViewName("index");
     // mav.addObject("title", "Hello Page");
     // mav.addObject("msg", "this is JPA sample page.");
-    // List<People> list = repository.findAll();
+    // // List<People> list = repository.findAll();
+    // List<People> list = repository.findAllOrderByName();
     // mav.addObject("data", list);
     // return mav;
     // }
@@ -111,14 +112,13 @@ public class HelloController {
         if (param == "") {
             mav = new ModelAndView("redirect:/find");
         } else {
+            String[] params = param.split(",");
             mav.addObject("title", "find result");
             mav.addObject("msg", "「" + param + "の検索結果");
             mav.addObject("value", param);
-            People data = dao.findById(Integer.parseInt(param));
-            People[] list = new People[] { data };
+            List<People> list = repository.findByAge(Integer.parseInt(params[0]), Integer.parseInt(params[1]));
             mav.addObject("data", list);
         }
         return mav;
     }
-
 }
