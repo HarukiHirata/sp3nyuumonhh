@@ -1,12 +1,16 @@
 package com.sp3nyuumonhh.sample1app.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.persistence.CascadeType;
 
 @Entity
 @Table(name = "people")
@@ -28,6 +32,10 @@ public class People {
 
     @Column(nullable = true)
     private String memo;
+
+    @OneToMany(mappedBy = "People")
+    @Column(nullable = true)
+    private List<Message> messages;
 
     public long getId() {
         return id;
@@ -67,5 +75,13 @@ public class People {
 
     public void setMemo(String memo) {
         this.memo = memo;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessage(List<Message> messages) {
+        this.messages = messages;
     }
 }
