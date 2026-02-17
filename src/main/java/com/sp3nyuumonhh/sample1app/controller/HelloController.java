@@ -32,18 +32,18 @@ public class HelloController {
     @Autowired
     private PeopleDAO<People> dao;
 
-    // @RequestMapping("/")
-    // public ModelAndView index(
-    // @ModelAttribute("formModel") People People,
-    // ModelAndView mav) {
-    // mav.setViewName("index");
-    // mav.addObject("title", "Hello Page");
-    // mav.addObject("msg", "this is JPA sample page.");
-    // // List<People> list = repository.findAll();
-    // List<People> list = repository.findAllOrderByName();
-    // mav.addObject("data", list);
-    // return mav;
-    // }
+    @RequestMapping("/")
+    public ModelAndView index(
+            @ModelAttribute("formModel") People People,
+            ModelAndView mav) {
+        mav.setViewName("index");
+        mav.addObject("title", "Hello Page");
+        mav.addObject("msg", "this is JPA sample page.");
+        // List<People> list = repository.findAll();
+        List<People> list = repository.findAllOrderByName();
+        mav.addObject("data", list);
+        return mav;
+    }
 
     @RequestMapping(value = "/", method = RequestMethod.POST)
     @Transactional
@@ -95,14 +95,14 @@ public class HelloController {
         return new ModelAndView("redirect:/");
     }
 
-    @RequestMapping(value = "/find", method = RequestMethod.GET)
-    public ModelAndView index(ModelAndView mav) {
-        mav.setViewName("find");
-        mav.addObject("msg", "Peopleのサンプルです。");
-        Iterable<People> list = dao.getAll();
-        mav.addObject("data", list);
-        return mav;
-    }
+    // @RequestMapping(value = "/find", method = RequestMethod.GET)
+    // public ModelAndView index(ModelAndView mav) {
+    // mav.setViewName("find");
+    // mav.addObject("msg", "Peopleのサンプルです。");
+    // Iterable<People> list = dao.getAll();
+    // mav.addObject("data", list);
+    // return mav;
+    // }
 
     @RequestMapping(value = "/find", method = RequestMethod.POST)
     public ModelAndView search(HttpServletRequest request,

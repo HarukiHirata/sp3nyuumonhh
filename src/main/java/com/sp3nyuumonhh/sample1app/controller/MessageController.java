@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.sp3nyuumonhh.sample1app.repositories.MessageRepository;
+import com.sp3nyuumonhh.sample1app.dao.PeopleDAOMessageImpl;
 import com.sp3nyuumonhh.sample1app.entity.Message;
 
 import jakarta.persistence.EntityManager;
@@ -24,6 +25,9 @@ public class MessageController {
     @Autowired
     MessageRepository repository;
 
+    @Autowired
+    PeopleDAOMessageImpl dao;
+
     @PersistenceContext
     EntityManager entityManager;
 
@@ -34,7 +38,7 @@ public class MessageController {
         mav.addObject("title", "Message");
         mav.addObject("msg", "Messageのサンプルです");
         mav.addObject("formModel", message);
-        List<Message> list = (List<Message>) repository.findAll();
+        List<Message> list = dao.getAll();
         mav.addObject("data", list);
         return mav;
     }

@@ -11,4 +11,8 @@ public interface PeopleDAO<T> extends Serializable {
     public List<T> findByName(String name);
 
     public List<T> find(String fstr);
+
+    public List<T> getPage(int page, int limit);
+
+    public List<T> findByAge(int min, int max);
 }
